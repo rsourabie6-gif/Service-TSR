@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSR Service BF - Transport et Livraison</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #1a365d;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 70px;
+            width: auto;
+            border-radius: 5px;
+            border: 2px solid #f0b429;
+        }
+        
+        .company-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .company-name span {
+            color: #f0b429;
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.8), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Main content */
+        .services-intro {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .services-intro h2 {
+            color: #1a365d;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .services-intro h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #f0b429;
+        }
+        
+        .services-intro p {
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 1.1rem;
+        }
+        
+        /* Services section */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: #1a365d;
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            color: #1a365d;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .reservation-btn {
+            background-color: #f0b429;
+            color: #1a365d;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .reservation-btn:hover {
+            background-color: #1a365d;
+            color: white;
+        }
+        
+        /* Reservation forms */
+        .reservation-form {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .form-header h3 {
+            color: #1a365d;
+            font-size: 1.5rem;
+        }
+        
+        .close-form {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-form:hover {
+            color: #e74c3c;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1a365d;
+            font-weight: 600;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn {
+            background-color: #1a365d;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #f0b429;
+            color: #1a365d;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a365d;
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #f0b429;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with logo -->
+    <header>
+        <div class="container header-content">
+            <div class="logo-section">
+                <img src="https://via.placeholder.com/150x70/1a365d/f0b429?text=TSR+Logo" alt="Logo TSR Burkina" class="logo-img">
+                <div>
+                    <div class="company-name">TSR <span>Service BF</span></div>
+                    <div class="tagline">Transport Sûr et Rapide à travers le Burkina Faso</div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> +226 70 25 31 38</p>
+                <p><i class="fas fa-envelope"></i> contact@tsrburkina.bf</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Bienvenue chez TSR Service BF</h1>
+            <p>Votre partenaire de confiance pour le transport de personnes et de colis à travers le Burkina Faso.</p>
+        </div>
+    </section>
+
+    <!-- Services introduction -->
+    <section class="services-intro">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <p>Choisissez le service qui correspond à vos besoins.</p>
+        </div>
+    </section>
+
+    <!-- Services section -->
+    <div class="container">
+        <div class="services">
+            <!-- Transport de personnes -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <h3>Transport de Personnes</h3>
+                <p>Réservez votre place dans nos véhicules confortables et climatisés pour vos déplacements à travers le Burkina Faso. Des départs réguliers vers toutes les principales villes.</p>
+                <button class="reservation-btn" id="placeReservationBtn">Réserver une Place</button>
+                
+                <!-- Reservation form for places -->
+                <div class="reservation-form" id="placeReservationForm">
+                    <div class="form-header">
+                        <h3>Réservation de Place</h3>
+                        <button class="close-form" id="closePlaceForm">&times;</button>
+                    </div>
+                    <form id="placeForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="departure">Ville de départ</label>
+                                <select id="departure" required>
+                                    <option value="">Sélectionnez une ville</option>
+                                    <option value="ouagadougou">Ouagadougou</option>
+                                    <option value="bobo-dioulasso">Bobo-Dioulasso</option>
+                                    <option value="koudougou">Koudougou</option>
+                                    <option value="ouahigouya">Ouahigouya</option>
+                                    <option value="tenkodogo">Tenkodogo</option>
+                                    <option value="dedougou">Dédougou</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">Ville de destination</label>
+                                <select id="destination" required>
+                                    <option value="">Sélectionnez une ville</option>
+                                    <option value="ouagadougou">Ouagadougou</option>
+                                    <option value="bobo-dioulasso">Bobo-Dioulasso</option>
+                                    <option value="koudougou">Koudougou</option>
+                                    <option value="ouahigouya">Ouahigouya</option>
+                                    <option value="tenkodogo">Tenkodogo</option>
+                                    <option value="dedougou">Dédougou</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="travelDate">Date de voyage</label>
+                                <input type="date" id="travelDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="passengers">Nombre de passagers</label>
+                                <select id="passengers" required>
+                                    <option value="1">1 passager</option>
+                                    <option value="2">2 passagers</option>
+                                    <option value="3">3 passagers</option>
+                                    <option value="4">4 passagers</option>
+                                    <option value="5">5 passagers ou plus</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fullName">Nom complet</label>
+                            <input type="text" id="fullName" placeholder="Votre nom complet" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Numéro de téléphone</label>
+                                <input type="tel" id="phone" placeholder="Votre numéro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">L'heure du depart</label>
+                                <input type="email" id="email" placeholder="00h00mn">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Confirmer la Réservation</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Transport de colis -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-box"></i>
+                </div>
+                <h3>Transport de Colis</h3>
+                <p>Expédiez vos colis en toute sécurité avec notre service de livraison rapide.</p>
+                <button class="reservation-btn" id="packageReservationBtn">Envoi de Colis</button>
+                
+                <!-- Reservation form for packages -->
+                <div class="reservation-form" id="packageReservationForm">
+                    <div class="form-header">
+                        <h3>Fiche d'Envoi de Colis</h3>
+                        <button class="close-form" id="closePackageForm">&times;</button>
+                    </div>
+                    <form id="packageForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="senderCity">Ville d'expédition</label>
+                                <select id="senderCity" required>
+                                    <option value="">Sélectionnez une ville</option>
+                                    <option value="ouagadougou">Ouagadougou</option>
+                                    <option value="bobo-dioulasso">Bobo-Dioulasso</option>
+                                    <option value="koudougou">Koudougou</option>
+                                    <option value="ouahigouya">Ouahigouya</option>
+                                    <option value="tenkodogo">Tenkodogo</option>
+                                    <option value="dedougou">Dédougou</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="receiverCity">Ville de destination</label>
+                                <select id="receiverCity" required>
+                                    <option value="">Sélectionnez une ville</option>
+                                    <option value="ouagadougou">Ouagadougou</option>
+                                    <option value="bobo-dioulasso">Bobo-Dioulasso</option>
+                                    <option value="koudougou">Koudougou</option>
+                                    <option value="ouahigouya">Ouahigouya</option>
+                                    <option value="tenkodogo">Tenkodogo</option>
+                                    <option value="dedougou">Dédougou</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="packageType">Type de colis</label>
+                            <select id="packageType" required>
+                                <option value="">Sélectionnez un type</option>
+                                <option value="documents">Documents</option>
+                                <option value="electronics">Appareils électroniques</option>
+                                <option value="clothing">Vêtements</option>
+                                <option value="food">Produits alimentaires</option>
+                                <option value="other">Autres</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="weight">Poids (kg)</label>
+                                <input type="number" id="weight" min="0.1" step="0.1" placeholder="Poids en kg" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dimensions">Code du colis</label>
+                                <input type="text" id="dimensions" placeholder="TSR bf..........c">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="senderInfo">Informations de l'expéditeur</label>
+                            <textarea id="senderInfo" rows="2" placeholder="Nom complet, adresse, téléphone" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="receiverInfo">Informations du destinataire</label>
+                            <textarea id="receiverInfo" rows="2" placeholder="Nom complet, adresse, téléphone" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Soumettre la Demande d'Envoi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TSR Service BF</h3>
+                    <p>Entreprise de transport de personnes et de colis au Burkina Faso, offrant des services fiables et sécurisés.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Avenue de la Nation, Ouagadougou</p>
+                        <p><i class="fas fa-phone"></i> +226 70 25 31 38</p>
+                        <p><i class="fas fa-envelope"></i> contact@tsrburkina.bf</p>
+                    </div>
+                    
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Horaires d'ouverture</h3>
+                    <p>Lundi - Vendredi: 05h00 - 23h00</p>
+                    <p>Samedi: 05h00 - 23h00</p>
+                    <p>Dimanche: 05h00 - 23h00</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 TSR Service BF. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        // DOM elements
+        const placeReservationBtn = document.getElementById('placeReservationBtn');
+        const packageReservationBtn = document.getElementById('packageReservationBtn');
+        const placeReservationForm = document.getElementById('placeReservationForm');
+        const packageReservationForm = document.getElementById('packageReservationForm');
+        const closePlaceForm = document.getElementById('closePlaceForm');
+        const closePackageForm = document.getElementById('closePackageForm');
+        const placeForm = document.getElementById('placeForm');
+        const packageForm = document.getElementById('packageForm');
+        
+        // Show place reservation form
+        placeReservationBtn.addEventListener('click', () => {
+            placeReservationForm.style.display = 'block';
+            packageReservationForm.style.display = 'none';
+            window.scrollTo({
+                top: placeReservationForm.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show package reservation form
+        packageReservationBtn.addEventListener('click', () => {
+            packageReservationForm.style.display = 'block';
+            placeReservationForm.style.display = 'none';
+            window.scrollTo({
+                top: packageReservationForm.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Close place reservation form
+        closePlaceForm.addEventListener('click', () => {
+            placeReservationForm.style.display = 'none';
+        });
+        
+        // Close package reservation form
+        closePackageForm.addEventListener('click', () => {
+            packageReservationForm.style.display = 'none';
+        });
+        
+        // Handle place form submission
+        placeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const departure = document.getElementById('departure').value;
+            const destination = document.getElementById('destination').value;
+            const travelDate = document.getElementById('travelDate').value;
+            const passengers = document.getElementById('passengers').value;
+            const fullName = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            
+            // In a real application, you would send this data to a server
+            // Here we just show an alert
+            alert(`Réservation confirmée!\n\nDétails:\n- De: ${departure}\n- À: ${destination}\n- Date: ${travelDate}\n- Passagers: ${passengers}\n- Nom: ${fullName}\n- Téléphone: ${phone}\n\nMerci d'avoir choisi TSR Service BF!`);
+            
+            // Reset form and hide it
+            placeForm.reset();
+            placeReservationForm.style.display = 'none';
+        });
+        
+        // Handle package form submission
+        packageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const senderCity = document.getElementById('senderCity').value;
+            const receiverCity = document.getElementById('receiverCity').value;
+            const packageType = document.getElementById('packageType').value;
+            const weight = document.getElementById('weight').value;
+            const senderInfo = document.getElementById('senderInfo').value;
+            const receiverInfo = document.getElementById('receiverInfo').value;
+            
+            // In a real application, you would send this data to a server
+            // Here we just show an alert
+            alert(`Demande d'envoi confirmée!\n\nDétails:\n- Expédition de: ${senderCity}\n- Destination: ${receiverCity}\n- Type: ${packageType}\n- Poids: ${weight} kg\n\nInformations expéditeur:\n${senderInfo}\n\nInformations destinataire:\n${receiverInfo}\n\nMerci d'avoir choisi TSR Service BF!`);
+            
+            // Reset form and hide it
+            packageForm.reset();
+            packageReservationForm.style.display = 'none';
+        });
+        
+        // Set minimum date to today for travel date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('travelDate').setAttribute('min', today);
+        
+        // Close forms when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!placeReservationForm.contains(e.target) && e.target !== placeReservationBtn) {
+                placeReservationForm.style.display = 'none';
+            }
+            
+            if (!packageReservationForm.contains(e.target) && e.target !== packageReservationBtn) {
+                packageReservationForm.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
